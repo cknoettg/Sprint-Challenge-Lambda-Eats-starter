@@ -8,6 +8,7 @@ const App = () => {
     <div className="app">
     <Router>
       <div>
+          <h1>Lambda Eats</h1>
           <button><Link to="/">Home</Link></button>
           <Route exact path="/" />
           <button><Link to="/pizza">Take Me To Pizza</Link></button>

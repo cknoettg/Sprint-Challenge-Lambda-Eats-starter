@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import * as Yup from "yup";
+//Stretch - must install styled-components for this to work
+import {Toggle} from 'react-toggle-component';
 
 //Yup validation - formSchema
 //only name and size are required
@@ -24,6 +26,8 @@ const formSchema = Yup.object().shape({
     topping4: Yup
       .boolean(),
     special_instructions: Yup
+      .string(),
+    toggle: Yup
       .string()
   });
 
@@ -39,7 +43,8 @@ const Form = (props) => {
         topping2: "",
         topping3: "",
         topping4: "",
-        special_instructions: ""
+        special_instructions: "",
+        toggle: ""
     });
 
     //state for our post request
@@ -56,7 +61,8 @@ const Form = (props) => {
         topping2: "",
         topping3: "",
         topping4: "",
-        special_instructions: ""
+        special_instructions: "",
+        toggle: ""
     });
 
     //submit button function
@@ -79,7 +85,8 @@ const Form = (props) => {
         topping2: "",
         topping3: "",
         topping4: "",
-        special_instructions: ""
+        special_instructions: "",
+        toggle: ""
         });
     })
     .catch(err => console.log(err.res));  
@@ -191,7 +198,10 @@ const Form = (props) => {
               value={pizza.special_instructions}
               onChange={inputChange}
               />
-            </label>
+            </label><br></br>
+            {/* Stretch: Add Toggle for Gluten-Free Crust */}
+            <Toggle name="toggle" value={pizza.toggle} onChange={inputChange} />
+            Gluten-Free Crust (+$100)
             <pre>{JSON.stringify(post, null, 2)}</pre>        
             <button id="submitter" disabled={buttonDisabled}>Add to Order</button>
           </form>
