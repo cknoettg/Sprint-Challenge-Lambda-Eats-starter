@@ -7,9 +7,11 @@ import * as Yup from "yup";
 const formSchema = Yup.object().shape({
     name: Yup
       .string()
+      .min(2, "Name is Required.")
       .required("Name is required."),
     size: Yup
       .string()
+      .notOneOf(["null", "", " "], "Size is Required")
       .required("Size is Required"),
     //TODO: form only validates if there is an
     //  attempt to check all four
@@ -86,7 +88,7 @@ const Form = (props) => {
    //enable button if form is valid
    useEffect(() => {
         formSchema.isValid(pizza).then(valid => {
-        setButtonDisabled(!valid);
+            setButtonDisabled(!valid);
         });
    }, [pizza]);
 
@@ -134,11 +136,13 @@ const Form = (props) => {
                 {/* size is going to be a select-option*/}
                 Choice of Size<br></br>
                 <select id="size" name="size" onChange={inputChange}>
+                    <option value="null"></option>
                     <option value="S">S</option>
                     <option value="M">M</option>
                     <option value="L">L</option>
                     <option value="XL">XL</option>
                 </select>
+                {errors.size.length > 1 ? <p className="error">{errors.size}</p> : null}
             </label><br></br>
             {/* TODO: Can we handle toppings as array */}
             <label htmlFor="topping1">
