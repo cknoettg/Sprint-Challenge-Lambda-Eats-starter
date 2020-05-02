@@ -119,6 +119,80 @@ const Form = (props) => {
       setPizza(newFormData);
     }; //end of inputChange
 
-}
+    return (
+        <form onSubmit={formSubmit}>
+            <label htmlFor="name">
+              Name
+              <input id="name" 
+              type="text" 
+              name="name" 
+              value={pizza.name}
+              onChange={inputChange} /> 
+              {errors.name.length > 1 ? <p className="error">{errors.name}</p> : null}  
+            </label><br></br>
+            <label htmlFor="size">
+                {/* size is going to be a select-option*/}
+                Choice of Size<br></br>
+                <select id="size" name="size" onChange={inputChange}>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+            </label><br></br>
+            {/* TODO: Can we handle toppings as array */}
+            <label htmlFor="topping1">
+              Add Toppings<br></br>
+              Choose up to 4.<br></br>
+              Pepperoni
+              <input
+              id="topping1"
+              type="checkbox"
+              name="topping1"
+              value={pizza.topping1}
+              onChange={inputChange} />
+            </label><br></br>
+            <label htmlFor="topping2">
+              Ham
+              <input
+              id="topping2"
+              type="checkbox"
+              name="topping2"
+              value={pizza.topping2}
+              onChange={inputChange} />
+            </label><br></br>
+            <label htmlFor="topping3">
+              Beef
+              <input
+              id="topping3"
+              type="checkbox"
+              name="topping3"
+              value={pizza.topping3}
+              onChange={inputChange} />
+            </label><br></br>
+            <label htmlFor="topping4">  
+              Bacon
+              <input
+              id="topping4"
+              type="checkbox"
+              name="topping4"
+              value={pizza.topping4}
+              onChange={inputChange} />           
+            </label><br></br>
+            <label htmlFor="special_instructions">
+              Special Instructions<br></br>
+              <textarea 
+              id="special_instructions"
+              name="special_instructions"
+              value={pizza.special_instructions}
+              onChange={inputChange}
+              />
+            </label>
+            <pre>{JSON.stringify(post, null, 2)}</pre>        
+            <button id="submitter" disabled={buttonDisabled}>Add to Order</button>
+          </form>
+    ); //end of return
+    
+} //end of Form
 
 export default Form;
